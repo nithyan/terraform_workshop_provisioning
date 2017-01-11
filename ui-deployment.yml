@@ -1,0 +1,7 @@
+---
+- hosts: application
+  become: true
+  roles:
+     - just-cinemas-ui-deployment
+  vars_files:
+    - vars/{{environ}}.yml

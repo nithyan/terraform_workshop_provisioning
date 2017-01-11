@@ -1,0 +1,7 @@
+---
+- hosts: application
+  become: true
+  roles:
+     - nginx
+  vars_files:
+    - vars/{{environ}}.yml

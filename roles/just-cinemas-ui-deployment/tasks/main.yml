@@ -1,0 +1,9 @@
+---
+- name: Create application directory
+  file: path={{application_dir}} state=directory recurse=yes
+
+# - name: Install dependencies
+#   include: dependencies.yml
+
+- name: Sync just-cinemas-ui files
+  include: sync_deployables.yml

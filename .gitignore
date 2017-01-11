@@ -1,0 +1,3 @@
+deployables/
+.vagrant/
+provision.retry

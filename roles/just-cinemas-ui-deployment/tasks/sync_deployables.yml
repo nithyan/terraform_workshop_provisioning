@@ -1,0 +1,37 @@
+---
+- name: Create application_source directory
+  file: path={{application_source}} state=directory recurse=yes
+
+- name: Create deploy directory
+  file: path={{deploy_dir}} state=directory recurse=yes
+
+- name: Create {{package_name}} directory
+  file: path={{deploy_dir}}/{{package_name}} state=directory recurse=yes
+
+- name: Create logs directory
+  file: path={{logs_dir}} state=directory recurse=yes
+
+- name: Create pids directory
+  file: path={{pids_dir}} state=directory recurse=yes
+
+- name: Create just-cinemas-ui directory
+  file: path={{deploy_dir}}/{{package_name}} state=directory recurse=yes
+#
+- name: artifact value
+  debug: var=artifact
+#
+- name: Download artifact
+  shell: wget -O {{application_source}}/{{package_name}}.{{extension}} {{artifact}}
+  # get_url:
+  #   url: "{{artifact}}"
+  #   dest: "{{application_source}}"
+  #   validate_certs: yes
+  #   force: yes
+  # when: artifact is defined
+
+- name: Unzip application
+  shell: tar -xzf {{application_source}}/{{package_name}}.{{extension}} -C {{deploy_dir}}/{{package_name}}
+  # unarchive: src={{application_source}}/{{package_name}}.{{extension}} dest={{deploy_dir}}/{{package_name}} copy=no
+
+# - name: Transfer application file
+#   copy: src={{local_application_source}}/{{packaged_dir_name}}/ dest={{deploy_dir}}/{{package_name}}

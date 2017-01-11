@@ -1,0 +1,11 @@
+---
+application_dir: /opt/application
+deploy_dir: "{{application_dir}}/deployables"
+log_file_name: just-cinemas-ui.log
+error_log_file_name: just-cinemas-ui-error.log
+logs_dir: "{{application_dir}}/logs"
+pids_dir: "{{application_dir}}/pids"
+
+package_name: just-cinemas-ui
+extension: tar.gz
+packaged_dir_name: dist

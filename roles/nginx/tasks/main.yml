@@ -1,0 +1,21 @@
+---
+
+- name: Update the repository cache and update package "nginx" to latest version using default release squeeze-backport
+  apt:
+    name: nginx
+    state: latest
+    update_cache: yes
+
+- name: nginx | enable at startup
+  service: name=nginx state=started enabled=yes
+
+- name: nginx | sites config dirs
+  file: dest=/etc/nginx/{{ item }} state=directory owner=root mode=0755
+  with_items:
+   - sites-available.d
+   - sites-enabled.d
+  notify: reload nginx
+
+- name: nginx | main config
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify: reload nginx
